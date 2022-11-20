@@ -1,5 +1,6 @@
 package tn.magasin.fatmamaazountest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,9 +29,11 @@ public class Facture {
 
     private  boolean active;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "facture")
     private List<DetailFacture> detailFactures;
 
+    @JsonIgnore
     @ManyToOne
     private Client client;
 

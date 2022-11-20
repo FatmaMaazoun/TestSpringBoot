@@ -30,7 +30,7 @@ public class Client {
 
     private String Password;
     @Enumerated(EnumType.STRING)
-    private CategorieProfession categorieProfession;
+    private CategorieClient categorieProfession;
 
     private Profession profession;
 
@@ -38,3 +38,4 @@ public class Client {
     private List<Facture> factures;
 
 }
+

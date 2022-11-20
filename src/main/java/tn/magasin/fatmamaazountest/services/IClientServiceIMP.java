@@ -2,9 +2,11 @@ package tn.magasin.fatmamaazountest.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.magasin.fatmamaazountest.entities.CategorieClient;
 import tn.magasin.fatmamaazountest.entities.Client;
 import tn.magasin.fatmamaazountest.repositories.ClientRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,5 +39,10 @@ public class IClientServiceIMP implements IClientService{
     @Override
     public Client retrieveClient(Long id) {
         return clientRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public float getChiffreAffaireParCategorieClient(CategorieClient categorieClient, Date startDate, Date endDate) {
+        return clientRepository.getChiffreAffaireParCategorieClient(categorieClient,startDate,endDate);
     }
 }

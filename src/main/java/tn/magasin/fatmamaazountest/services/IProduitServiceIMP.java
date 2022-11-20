@@ -11,8 +11,10 @@ import tn.magasin.fatmamaazountest.repositories.ProduitRepository;
 import tn.magasin.fatmamaazountest.repositories.RayonRepository;
 import tn.magasin.fatmamaazountest.repositories.StockRepository;
 
+import javax.transaction.Transactional;
 import java.beans.Transient;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -62,24 +64,30 @@ public class IProduitServiceIMP implements IProduitService {
         }
 
     }
-    @Transient
+    @Transactional
     @Override
-    public void assignFournisseurToProduit(Long fournisseurId, Long produitId) {
-        Produit produit=produitRepository.findById(produitId).orElse(null);
-        Fournisseur fournisseur=fournisseurRepository.findById(fournisseurId).orElse(null);
+    public Produit assignFournisseurToProduit(Long fournisseurId, Long produitId) {
+        Produit produit = produitRepository.findById(produitId).orElse(null);
+        Fournisseur fournisseur = fournisseurRepository.findById(fournisseurId).orElse(null);
 
-        if(fournisseur!=null && produit!=null){
-            if(produit.getFournisseurs()!=null)
-            {produit.getFournisseurs().add(fournisseur);
-            }
-            else
-            {
-                List<Fournisseur> fournisseurs=new ArrayList<Fournisseur>();
+        if (fournisseur != null && produit != null) {
+            if (produit.getFournisseurs() != null) {
+                produit.getFournisseurs().add(fournisseur);
+            } else {
+                List<Fournisseur> fournisseurs = new ArrayList<Fournisseur>();
                 produit.setFournisseurs(fournisseurs);
             }
+
+            return produit;
         }
-
-
-
+return null;
     }
+
+    @Override
+    public float getRevenuBrutProduit(Long idProduit, Date startDate, Date endDate) {
+        Produit produit = produitRepository.findById(idProduit).orElse(null);
+        return produitRepository.getRevenuBrutProduit(produit,startDate,endDate);
+    }
+
+
 }

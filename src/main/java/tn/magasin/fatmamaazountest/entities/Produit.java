@@ -23,6 +23,7 @@ public class Produit {
     private String libelleProduit;
     private float prixUnitaire;
 
+    @JsonIgnore
     @ManyToMany
     private List<Fournisseur> fournisseurs;
 
@@ -34,6 +35,7 @@ public class Produit {
     @ManyToOne
     private  Stock stock;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.PERSIST)
     private  DetailProduit detailProduit;
 

@@ -38,8 +38,8 @@ public class ProduitController {
           return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/assignFP/{fournisseurId}/{produitId}")
-    public ResponseEntity assignFournisseurToProduit(Long fournisseurId, Long produitId) {
+    @PostMapping("assignFP/{fournisseurId}/{produitId}")
+    public ResponseEntity assignFournisseurToProduit(@PathVariable Long fournisseurId, @PathVariable Long produitId) {
         produitService.assignFournisseurToProduit(fournisseurId,produitId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
